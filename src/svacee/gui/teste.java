@@ -5,17 +5,21 @@
  */
 package svacee.gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author aluno
  */
-public class SvaceeMainForm extends javax.swing.JFrame {
+public class teste extends javax.swing.JFrame {
 
     /**
-     * Creates new form SvaceeMainForm
+     * Creates new form teste
      */
-    public SvaceeMainForm() {
+    public teste() {
         initComponents();
+        getContentPane().setBackground(Color.white);
+        
     }
 
     /**
@@ -27,77 +31,74 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jToolBar2 = new javax.swing.JToolBar();
+        jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(25, 1, 1));
 
-        jToolBar2.setBackground(new java.awt.Color(217, 217, 217));
-        jToolBar2.setFloatable(false);
-        jToolBar2.setRollover(true);
+        jToolBar1.setFloatable(false);
+        jToolBar1.setRollover(true);
+        jToolBar1.add(jSeparator1);
 
-        jSeparator1.setBackground(new java.awt.Color(1, 1, 1));
-        jToolBar2.add(jSeparator1);
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/image/FolderOpened_Yellow_Grande.png"))); // NOI18N
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setMaximumSize(new java.awt.Dimension(60, 45));
+        jButton1.setMinimumSize(new java.awt.Dimension(60, 45));
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
+        jToolBar1.add(jSeparator2);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/image/FolderOpened_Yellow.png"))); // NOI18N
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setMaximumSize(new java.awt.Dimension(60, 45));
-        jButton2.setMinimumSize(new java.awt.Dimension(60, 45));
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton2);
-        jToolBar2.add(jSeparator2);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/image/logomarca2.png"))); // NOI18N
 
-        jMenu1.setText("Arquivo");
+        jMenuBar1.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
 
+        jMenu1.setText("Arquivo  ");
+        jMenu1.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+
+        jMenuItem1.setFont(new java.awt.Font("Ubuntu", 0, 17)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/image/FolderOpened_Yellow_Small.png"))); // NOI18N
         jMenuItem1.setText("Obter Dados CSV");
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setFont(new java.awt.Font("Ubuntu", 0, 17)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/image/Close_Box_Red.png"))); // NOI18N
         jMenuItem2.setText("Sair");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Visualizar");
+        jMenu2.setText("Visualizador  ");
+        jMenu2.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
 
+        jMenuItem3.setFont(new java.awt.Font("Ubuntu", 0, 17)); // NOI18N
         jMenuItem3.setText("Tabela de Dados");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem5.setText("Gráfico de Consumo");
-        jMenu2.add(jMenuItem5);
+        jMenuItem4.setFont(new java.awt.Font("Ubuntu", 0, 17)); // NOI18N
+        jMenuItem4.setText("Gráfico de Consumo");
+        jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Ajuda");
+        jMenu3.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
 
-        jMenuItem4.setText("Sobre");
-        jMenu3.add(jMenuItem4);
+        jMenuItem5.setFont(new java.awt.Font("Ubuntu", 0, 17)); // NOI18N
+        jMenuItem5.setText("Sobre");
+        jMenu3.add(jMenuItem5);
 
         jMenuBar1.add(jMenu3);
 
@@ -107,28 +108,22 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
-
-        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,26 +142,27 @@ public class SvaceeMainForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SvaceeMainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(teste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SvaceeMainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(teste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SvaceeMainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(teste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SvaceeMainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(teste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SvaceeMainForm().setVisible(true);
+                new teste().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -176,9 +172,8 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
