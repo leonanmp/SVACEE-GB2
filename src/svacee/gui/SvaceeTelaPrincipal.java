@@ -6,7 +6,13 @@
 package svacee.gui;
 
 import java.awt.Color;
-import svacee.control.SvaceeLeitor;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import svacee.control.SvaceeDadoConsumoCtrl;
 
 /**
  *
@@ -14,7 +20,7 @@ import svacee.control.SvaceeLeitor;
  */
 public class SvaceeTelaPrincipal extends javax.swing.JFrame {
 
-    SvaceeLeitor obj = new SvaceeLeitor();
+    SvaceeDadoConsumoCtrl obj = new SvaceeDadoConsumoCtrl();
         
     public SvaceeTelaPrincipal() {
         initComponents();
@@ -61,6 +67,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("\n");
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -201,11 +208,11 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        obj.run();
+        run();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        obj.run();
+        run();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
@@ -242,6 +249,45 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
                 new SvaceeTelaPrincipal().setVisible(true);
             }
         });
+    }
+    
+    public void run() {
+
+        BufferedReader br = null;
+        String linha = "";
+        String csvDivisor = ",";
+        try {
+
+            JFileChooser jfc = new JFileChooser();
+            int retorno = jfc.showOpenDialog(null);
+            if (retorno == JFileChooser.APPROVE_OPTION) {
+                File arq = jfc.getSelectedFile();
+                FileReader fr = new FileReader(arq);
+                br = new BufferedReader(fr);
+                /*while ((linha = br.readLine()) != null) {
+
+                    String[] pais = linha.split(csvDivisor);
+
+                    System.out.println("Noome [code= " + pais[pais.length - 2]
+                            + "valor1=" + pais[pais.length - 1] + "]");
+
+                }
+                        */
+            } 
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
