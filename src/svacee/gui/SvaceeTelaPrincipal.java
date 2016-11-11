@@ -99,6 +99,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         abaGrafico = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -202,15 +203,23 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
 
         abaGrafico.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout abaGraficoLayout = new javax.swing.GroupLayout(abaGrafico);
         abaGrafico.setLayout(abaGraficoLayout);
         abaGraficoLayout.setHorizontalGroup(
             abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 656, Short.MAX_VALUE)
+            .addGroup(abaGraficoLayout.createSequentialGroup()
+                .addGap(253, 253, 253)
+                .addComponent(jLabel1)
+                .addContainerGap(352, Short.MAX_VALUE))
         );
         abaGraficoLayout.setVerticalGroup(
             abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 328, Short.MAX_VALUE)
+            .addGroup(abaGraficoLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jLabel1)
+                .addContainerGap(223, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Gráfico", abaGrafico);
@@ -375,6 +384,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
