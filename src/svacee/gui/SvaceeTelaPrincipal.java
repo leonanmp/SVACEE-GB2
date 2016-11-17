@@ -49,7 +49,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
                 File csv = jfc.getSelectedFile();
 
                 sdcc.obterDadosCsv(csv);
-                exibirDados();
+                
 
             }
         } catch (FileNotFoundException e) {
@@ -329,10 +329,12 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         painelGuias.setSelectedComponent(abaTabela);
+        exibirDados();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         painelGuias.setSelectedComponent(abaTabela);
+        exibirDados();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
