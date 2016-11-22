@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.Principal;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +22,7 @@ import svacee.model.SvaceeDadoConsumo;
  *
  * @author aluno
  */
-public class SvaceeTelaPrincipal extends javax.swing.JFrame {
+public class SvaceeTelaPrincipal extends javax.swing.JFrame{
 
     SvaceeDadoConsumoCtrl sdcc;
 
@@ -37,18 +38,21 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
         jButton5.setToolTipText("Sair");
 
         sdcc = new SvaceeDadoConsumoCtrl();
-
+        
+        
     }
 
     public void lerArquivo() {
 
         try {
+            sdcc.getDadosLista().clear();
             JFileChooser jfc = new JFileChooser();
             int dadosRetorno = jfc.showOpenDialog(null);
             if (dadosRetorno == JFileChooser.APPROVE_OPTION) {
                 File csv = jfc.getSelectedFile();
 
                 sdcc.obterDadosCsv(csv);
+                exibirDados();
                 
 
             }
@@ -65,9 +69,11 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.getDataVector().removeAllElements();
         
+        
         for(SvaceeDadoConsumo sdc:sdcc.getDadosLista()){
             model.addRow(new Object[]{sdc.getDataHra(),sdc.getIdColeta(),sdc.getValKwH()});             
-        } 
+        }
+        
     }
 
     /**
@@ -196,7 +202,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
             abaTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaTabelaLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 47, Short.MAX_VALUE))
+                .addGap(0, 50, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Tabela", abaTabela);
@@ -219,7 +225,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
             .addGroup(abaGraficoLayout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(jLabel1)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Gráfico", abaGrafico);
@@ -329,12 +335,12 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         painelGuias.setSelectedComponent(abaTabela);
-        exibirDados();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         painelGuias.setSelectedComponent(abaTabela);
-        exibirDados();
+        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
