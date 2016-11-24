@@ -30,17 +30,39 @@ public class SvaceeSobre extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Sobre:");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setText("O Sistema de Visualização de Análise de \nConsumo de Energia Elétrica (SVACEE), consiste\n em disponibilizar para o usuário, uma interface\n fácile dinâmica para a verificação do consumo \nde energia elétrica em sua empresa, na qual \natravés de aquivosidentificados em modo .CSV \nvocê poderá gerar gráficos e/ou tabelas para a\npartir delas avaliar o consumo da sua empresa\ne comparar conforme o decorrer \nde um determinado tempo.\n\nElaborado por Branco, Guli, Pera e Rocha.");
+        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sobre:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/gui/image/svaaceelogo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -83,5 +105,8 @@ public class SvaceeSobre extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
