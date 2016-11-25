@@ -41,20 +41,21 @@ public class SvaceeSobre extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("O Sistema de Visualização de Análise de \nConsumo de Energia Elétrica (SVACEE), consiste\n em disponibilizar para o usuário, uma interface\n fácile dinâmica para a verificação do consumo \nde energia elétrica em sua empresa, na qual \natravés de aquivosidentificados em modo .CSV \nvocê poderá gerar gráficos e/ou tabelas para a\npartir delas avaliar o consumo da sua empresa\ne comparar conforme o decorrer \nde um determinado tempo.\n\nElaborado por Branco, Guli, Pera e Rocha.");
+        jTextArea1.setText("O Sistema de Visualização de Análise de \nConsumo de Energia Elétrica (SVACEE), consiste\n em disponibilizar para o usuário, uma interface\n fácile dinâmica para a verificação do consumo \nde energia elétrica em sua empresa, na qual \natravés de aquivosidentificados em modo .CSV \nvocê poderá gerar gráficos e/ou tabelas para a\npartir delas avaliar o consumo da sua empresa\ne comparar conforme o decorrer \nde um determinado tempo.\n\nElaborado por \nGabriel Branco, Milena Guli, \nLeonan A. e Kevin Rocha.");
         jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sobre:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
         jScrollPane1.setViewportView(jTextArea1);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/gui/image/svaaceelogo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/gui/image/svaceelogo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

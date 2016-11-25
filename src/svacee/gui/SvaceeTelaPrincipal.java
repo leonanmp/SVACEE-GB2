@@ -5,6 +5,7 @@
  */
 package svacee.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,11 +13,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.Principal;
+import java.sql.Timestamp;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.JTree;
 import javax.swing.table.DefaultTableModel;
 import svacee.control.SvaceeDadoConsumoCtrl;
 import svacee.model.SvaceeDadoConsumo;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.Dataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -38,10 +49,9 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         jButton5.setToolTipText("Sair");
 
         sdcc = new SvaceeDadoConsumoCtrl();
-        
-        
+          
     }
-
+    
     public void lerArquivo() {
 
         try {
@@ -52,7 +62,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
                 File csv = jfc.getSelectedFile();
 
                 sdcc.obterDadosCsv(csv);
-                exibirDados();
+                exibirDadosTabela();          
                 
 
             }
@@ -65,7 +75,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         }
     }
     
-    public void exibirDados(){
+    public void exibirDadosTabela(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.getDataVector().removeAllElements();
         
@@ -74,8 +84,8 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
             model.addRow(new Object[]{sdc.getDataHra(),sdc.getIdColeta(),sdc.getValKwH()});             
         }
         
-    }
-
+    }       
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The contentu of this method is always
@@ -105,7 +115,6 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         abaGrafico = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -214,23 +223,15 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
 
         abaGrafico.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("jLabel1");
-
         javax.swing.GroupLayout abaGraficoLayout = new javax.swing.GroupLayout(abaGrafico);
         abaGrafico.setLayout(abaGraficoLayout);
         abaGraficoLayout.setHorizontalGroup(
             abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaGraficoLayout.createSequentialGroup()
-                .addGap(253, 253, 253)
-                .addComponent(jLabel1)
-                .addContainerGap(352, Short.MAX_VALUE))
+            .addGap(0, 656, Short.MAX_VALUE)
         );
         abaGraficoLayout.setVerticalGroup(
             abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaGraficoLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel1)
-                .addContainerGap(226, Short.MAX_VALUE))
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         painelGuias.addTab("Gráfico", abaGrafico);
@@ -293,6 +294,11 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         jMenuItem5.setFont(new java.awt.Font("Ubuntu", 0, 17)); // NOI18N
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/gui/image/info(1).png"))); // NOI18N
         jMenuItem5.setText("Sobre");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem5);
 
         jMenuBar1.add(jMenu3);
@@ -356,6 +362,10 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         new SvaceeSobre().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        new SvaceeSobre().setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -401,7 +411,6 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
