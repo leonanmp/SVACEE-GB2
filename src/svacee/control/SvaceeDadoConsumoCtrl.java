@@ -13,18 +13,23 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
+import jdk.nashorn.internal.ir.WhileNode;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import svacee.model.SvaceeDadoConsumo;
 
 public class SvaceeDadoConsumoCtrl {
-    
+
     private File arquivo;
     private List<SvaceeDadoConsumo> dadosLista = new ArrayList<>();
-    
-    
-    public SvaceeDadoConsumoCtrl(){
-        
+    private List<String> listaPontoColeta = new ArrayList<>();
+
+    public SvaceeDadoConsumoCtrl() {
+
     }
-    
+
     public void obterDadosCsv(File arq) throws FileNotFoundException, IOException {
         setArquivo(arq);
         String linha = "";
@@ -33,44 +38,53 @@ public class SvaceeDadoConsumoCtrl {
 
         BufferedReader br = null;
         FileReader fr = new FileReader(arq);
-        
+
         br = new BufferedReader(fr);
-        
+
         SvaceeDadoConsumo sdc;
-        
+
         while ((linha = br.readLine()) != null) {
 
             linhas = linha.split(",");
-            
-            for(String v:linhas){
-                
+
+            for (String v : linhas) {
+
                 colunas = v.split(";");
-                
+
                 sdc = new SvaceeDadoConsumo();
-                
+
                 sdc.setDataHra(Timestamp.valueOf(colunas[0]));
                 sdc.setIdColeta(colunas[1]);
                 sdc.setValKwH(Double.parseDouble(colunas[2]));
-                
+
                 getDadosLista().add(sdc);
-                
-                
-            }                       
+
+            }
         }
     }
-    
+
+    public void preenchePontoColeta() {
+        for (SvaceeDadoConsumo dc : getDadosLista()) {
+            if (!listaPontoColeta.contains(dc.getIdColeta())) {
+                getListaPontoColeta().add(dc.getIdColeta());
+            } else {
+                System.out.println("Ponto já existente");
+            }
+        }
+
+        
+    }
+
+    //testando dataset
+
     //pegar o caminho absoluto que o JFileChooser vai retornar e
     //ler o arquivo aqui.
-
     /**
      * @return the sdc
      */
-
-
     /**
      * @param sdc the sdc to set
-*/
-
+     */
     /**
      * @return the arquivo
      */
@@ -98,7 +112,19 @@ public class SvaceeDadoConsumoCtrl {
     public void setDadosLista(List<SvaceeDadoConsumo> dadosLista) {
         this.dadosLista = dadosLista;
     }
-    
-    
-    
+
+    /**
+     * @return the listaPontoColeta
+     */
+    public List<String> getListaPontoColeta() {
+        return listaPontoColeta;
+    }
+
+    /**
+     * @param listaPontoColeta the listaPontoColeta to set
+     */
+    public void setListaPontoColeta(List<String> listaPontoColeta) {
+        this.listaPontoColeta = listaPontoColeta;
+    }
+
 }

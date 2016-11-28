@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.Iterator;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
@@ -49,6 +50,9 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         jButton5.setToolTipText("Sair");
 
         sdcc = new SvaceeDadoConsumoCtrl();
+        
+        //testando gráfico
+        
           
     }
     
@@ -62,7 +66,9 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
                 File csv = jfc.getSelectedFile();
 
                 sdcc.obterDadosCsv(csv);
-                exibirDadosTabela();          
+                exibirDadosTabela();
+                sdcc.preenchePontoColeta();
+                preencherComboBox();
                 
 
             }
@@ -84,7 +90,16 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
             model.addRow(new Object[]{sdc.getDataHra(),sdc.getIdColeta(),sdc.getValKwH()});             
         }
         
-    }       
+    }
+    
+    public void preencherComboBox(){
+        jCBPontoColeta.removeAllItems();
+        
+        Iterator i = sdcc.getListaPontoColeta().iterator();
+        while(i.hasNext()){
+            jCBPontoColeta.addItem((String) i.next());
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -115,6 +130,8 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         abaGrafico = new javax.swing.JPanel();
+        jCBPontoColeta = new javax.swing.JComboBox<>();
+        jLTitulo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -214,24 +231,43 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         );
         abaTabelaLayout.setVerticalGroup(
             abaTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaTabelaLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 50, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
         );
 
         painelGuias.addTab("Tabela", abaTabela);
 
         abaGrafico.setBackground(new java.awt.Color(255, 255, 255));
 
+        jCBPontoColeta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jCBPontoColeta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jCBPontoColeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBPontoColetaActionPerformed(evt);
+            }
+        });
+
+        jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLTitulo.setText("Gráfico de consumo:");
+
         javax.swing.GroupLayout abaGraficoLayout = new javax.swing.GroupLayout(abaGrafico);
         abaGrafico.setLayout(abaGraficoLayout);
         abaGraficoLayout.setHorizontalGroup(
             abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 656, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaGraficoLayout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
+                .addComponent(jLTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(172, 172, 172))
         );
         abaGraficoLayout.setVerticalGroup(
             abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 331, Short.MAX_VALUE)
+            .addGroup(abaGraficoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(368, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Gráfico", abaGrafico);
@@ -317,7 +353,8 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelGuias))
+                .addComponent(painelGuias, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -366,6 +403,11 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         new SvaceeSobre().setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jCBPontoColetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPontoColetaActionPerformed
+        String item = (String) jCBPontoColeta.getSelectedItem();
+        //jLTitulo.setText("Gráfico de consumo: "+item);
+    }//GEN-LAST:event_jCBPontoColetaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,6 +453,8 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jCBPontoColeta;
+    private javax.swing.JLabel jLTitulo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

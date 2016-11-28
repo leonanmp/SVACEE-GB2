@@ -60,7 +60,7 @@
               <Font name="Arial" size="14" style="1"/>
             </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="O Sistema de Visualiza&#xe7;&#xe3;o de An&#xe1;lise de &#xa;Consumo de Energia El&#xe9;trica (SVACEE), consiste&#xa; em disponibilizar para o usu&#xe1;rio, uma interface&#xa; f&#xe1;cile din&#xe2;mica para a verifica&#xe7;&#xe3;o do consumo &#xa;de energia el&#xe9;trica em sua empresa, na qual &#xa;atrav&#xe9;s de aquivosidentificados em modo .CSV &#xa;voc&#xea; poder&#xe1; gerar gr&#xe1;ficos e/ou tabelas para a&#xa;partir delas avaliar o consumo da sua empresa&#xa;e comparar conforme o decorrer &#xa;de um determinado tempo.&#xa;&#xa;Elaborado por &#xa;Gabriel Branco, Milena Guli, &#xa;Leonan A. e Kevin Rocha."/>
+            <Property name="text" type="java.lang.String" value="O Sistema de Visualiza&#xe7;&#xe3;o de An&#xe1;lise de &#xa;Consumo de Energia El&#xe9;trica (SVACEE), consiste&#xa; em disponibilizar para o usu&#xe1;rio, uma interface&#xa; f&#xe1;cile din&#xe2;mica para a verifica&#xe7;&#xe3;o do consumo &#xa;de energia el&#xe9;trica em sua empresa, na qual &#xa;atrav&#xe9;s de aquivosidentificados em modo .CSV &#xa;voc&#xea; poder&#xe1; gerar gr&#xe1;ficos e/ou tabelas para a&#xa;partir delas avaliar o consumo da sua empresa&#xa;e comparar conforme o decorrer &#xa;de um determinado tempo.&#xa;&#xa;Elaborado por &#xa;Gabriel Branco, Kevin Rocha, &#xa;Leonan A. e Milena Guli."/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Sobre:">

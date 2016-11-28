@@ -41,7 +41,7 @@ public class SvaceeSobre extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("O Sistema de Visualização de Análise de \nConsumo de Energia Elétrica (SVACEE), consiste\n em disponibilizar para o usuário, uma interface\n fácile dinâmica para a verificação do consumo \nde energia elétrica em sua empresa, na qual \natravés de aquivosidentificados em modo .CSV \nvocê poderá gerar gráficos e/ou tabelas para a\npartir delas avaliar o consumo da sua empresa\ne comparar conforme o decorrer \nde um determinado tempo.\n\nElaborado por \nGabriel Branco, Milena Guli, \nLeonan A. e Kevin Rocha.");
+        jTextArea1.setText("O Sistema de Visualização de Análise de \nConsumo de Energia Elétrica (SVACEE), consiste\n em disponibilizar para o usuário, uma interface\n fácile dinâmica para a verificação do consumo \nde energia elétrica em sua empresa, na qual \natravés de aquivosidentificados em modo .CSV \nvocê poderá gerar gráficos e/ou tabelas para a\npartir delas avaliar o consumo da sua empresa\ne comparar conforme o decorrer \nde um determinado tempo.\n\nElaborado por \nGabriel Branco, Kevin Rocha, \nLeonan A. e Milena Guli.");
         jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sobre:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
         jScrollPane1.setViewportView(jTextArea1);
 
