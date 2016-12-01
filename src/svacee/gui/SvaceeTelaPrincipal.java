@@ -5,27 +5,23 @@
  */
 package svacee.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.security.Principal;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTree;
 import javax.swing.table.DefaultTableModel;
 import svacee.control.SvaceeDadoConsumoCtrl;
 import svacee.model.SvaceeDadoConsumo;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.Dataset;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -34,14 +30,15 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @author aluno
  */
-public class SvaceeTelaPrincipal extends javax.swing.JFrame{
+public class SvaceeTelaPrincipal extends javax.swing.JFrame {
 
     SvaceeDadoConsumoCtrl sdcc;
+    String itemSelecionado;
+    SvaceeDadoConsumo dc;
 
     public SvaceeTelaPrincipal() {
         initComponents();
         getContentPane().setBackground(Color.white);
-        
 
         jButton1.setToolTipText("Escolher arquivo CSV");
         jButton2.setToolTipText("Gerar tabela de dados");
@@ -50,16 +47,15 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         jButton5.setToolTipText("Sair");
 
         sdcc = new SvaceeDadoConsumoCtrl();
-        
+
         //testando gráfico
-        
-          
     }
     
     public void lerArquivo() {
-
+        sdcc.setTestaArquivo(1);
         try {
             sdcc.getDadosLista().clear();
+            sdcc.getListaPontoColeta().clear();
             JFileChooser jfc = new JFileChooser();
             int dadosRetorno = jfc.showOpenDialog(null);
             if (dadosRetorno == JFileChooser.APPROVE_OPTION) {
@@ -69,7 +65,6 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
                 exibirDadosTabela();
                 sdcc.preenchePontoColeta();
                 preencherComboBox();
-                
 
             }
         } catch (FileNotFoundException e) {
@@ -80,27 +75,78 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
 
         }
     }
-    
-    public void exibirDadosTabela(){
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+
+    public void exibirDadosTabela() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.getDataVector().removeAllElements();
-        
-        
-        for(SvaceeDadoConsumo sdc:sdcc.getDadosLista()){
-            model.addRow(new Object[]{sdc.getDataHra(),sdc.getIdColeta(),sdc.getValKwH()});             
+
+        for (SvaceeDadoConsumo sdc : sdcc.getDadosLista()) {
+            model.addRow(new Object[]{sdc.getDataHra(), sdc.getIdColeta(), sdc.getValKwH()});
         }
-        
+
     }
-    
-    public void preencherComboBox(){
+
+    public void preencherComboBox() {
         jCBPontoColeta.removeAllItems();
-        
+
         Iterator i = sdcc.getListaPontoColeta().iterator();
-        while(i.hasNext()){
+        while (i.hasNext()) {
             jCBPontoColeta.addItem((String) i.next());
         }
     }
-    
+
+    //TESTANDO GRÁFICO
+    public void montaGrafico() {
+        if(sdcc.getTestaArquivo()==2){
+        if (painelGuias.getTabCount() == 3) {
+            painelGuias.remove(2);
+        }
+
+        JPanel chartPanel = createChartPanel();
+        painelGuias.add(chartPanel, "Visualizador");
+        painelGuias.setSelectedComponent(chartPanel);
+        } else{
+            JOptionPane.showMessageDialog(null, "Visualização indisponíve "
+                    + "\nEscolha um arquivo CSV", "ERRO", JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }
+
+    private JPanel createChartPanel() {
+        String chartTitle = "Gráfico de consumo:" + itemSelecionado;
+        String xAxisLabel = "Hora (Hora.minuto)";
+        String yAxisLabel = "Valor KwH";
+
+        XYDataset dataset = createDataset();
+
+        JFreeChart chart = ChartFactory.createXYLineChart(chartTitle,
+                xAxisLabel, yAxisLabel, dataset);
+
+        XYPlot plot = chart.getXYPlot();
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        plot.setRenderer(renderer);
+
+        return new ChartPanel(chart);
+    }
+
+    private XYDataset createDataset() {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries linha = new XYSeries(itemSelecionado);
+
+        //dc = new SvaceeDadoConsumo();
+        SimpleDateFormat formataHora = new SimpleDateFormat("HH.mm");
+        //String formatedDate = format.format(dc.getDataHra().getTime());
+
+        for (SvaceeDadoConsumo dc : sdcc.getListaGrafico()) {
+            linha.add(Double.parseDouble(formataHora.format(dc.getDataHra())), dc.getValKwH());
+            //System.out.println(format.format(dc.getDataHra()).substring(0, 2)+"."+format.format(dc.getDataHra()).substring(1, 2));
+            //System.out.println(formataHora.format(dc.getDataHra()));
+        }
+        dataset.addSeries(linha);
+
+        return dataset;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The contentu of this method is always
@@ -132,6 +178,8 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         abaGrafico = new javax.swing.JPanel();
         jCBPontoColeta = new javax.swing.JComboBox<>();
         jLTitulo = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -247,27 +295,53 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
         });
 
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setText("Gráfico de consumo:");
+        jLTitulo.setText("Escolha o equipamento:");
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/gui/image/viewGraficoGrand.png"))); // NOI18N
+        jButton6.setText("Visualizar Gráfico");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/gui/image/line-graph.png"))); // NOI18N
 
         javax.swing.GroupLayout abaGraficoLayout = new javax.swing.GroupLayout(abaGrafico);
         abaGrafico.setLayout(abaGraficoLayout);
         abaGraficoLayout.setHorizontalGroup(
             abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaGraficoLayout.createSequentialGroup()
-                .addContainerGap(124, Short.MAX_VALUE)
-                .addComponent(jLTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCBPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172))
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addGroup(abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaGraficoLayout.createSequentialGroup()
+                        .addComponent(jLTitulo)
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaGraficoLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(abaGraficoLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jCBPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(78, 78, 78))
         );
         abaGraficoLayout.setVerticalGroup(
             abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaGraficoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCBPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(368, Short.MAX_VALUE))
+                    .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jCBPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(abaGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(abaGraficoLayout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(abaGraficoLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(271, 271, 271))
         );
 
         painelGuias.addTab("Gráfico", abaGrafico);
@@ -383,12 +457,12 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         painelGuias.setSelectedComponent(abaTabela);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         painelGuias.setSelectedComponent(abaTabela);
-        
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -404,9 +478,15 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jCBPontoColetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPontoColetaActionPerformed
+        sdcc.getListaGrafico().clear();
         String item = (String) jCBPontoColeta.getSelectedItem();
-        //jLTitulo.setText("Gráfico de consumo: "+item);
+        sdcc.preencheGrafico(item);
+        itemSelecionado = item;
     }//GEN-LAST:event_jCBPontoColetaActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        montaGrafico();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -453,8 +533,10 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame{
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jCBPontoColeta;
     private javax.swing.JLabel jLTitulo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

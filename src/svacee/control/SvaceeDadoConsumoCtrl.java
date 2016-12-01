@@ -13,23 +13,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Iterator;
-import jdk.nashorn.internal.ir.WhileNode;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 import svacee.model.SvaceeDadoConsumo;
 
 public class SvaceeDadoConsumoCtrl {
 
     private File arquivo;
+    private int testaArquivo;
     private List<SvaceeDadoConsumo> dadosLista = new ArrayList<>();
     private List<String> listaPontoColeta = new ArrayList<>();
+    private List<SvaceeDadoConsumo> listaGrafico = new ArrayList<>();
 
     public SvaceeDadoConsumoCtrl() {
 
     }
-
+    
     public void obterDadosCsv(File arq) throws FileNotFoundException, IOException {
         setArquivo(arq);
         String linha = "";
@@ -61,6 +58,7 @@ public class SvaceeDadoConsumoCtrl {
 
             }
         }
+        setTestaArquivo(2);
     }
 
     public void preenchePontoColeta() {
@@ -68,13 +66,21 @@ public class SvaceeDadoConsumoCtrl {
             if (!listaPontoColeta.contains(dc.getIdColeta())) {
                 getListaPontoColeta().add(dc.getIdColeta());
             } else {
-                System.out.println("Ponto já existente");
+                //System.out.println("Ponto já existente");
             }
-        }
-
-        
+        }    
     }
 
+    public void preencheGrafico(String item){
+        for (SvaceeDadoConsumo dc: getDadosLista()){
+            if (dc.getIdColeta().equalsIgnoreCase(item)){
+                dc.getDataHra();
+                dc.getValKwH();
+                getListaGrafico().add(dc);
+                
+            }
+        }
+    }
     //testando dataset
 
     //pegar o caminho absoluto que o JFileChooser vai retornar e
@@ -126,5 +132,34 @@ public class SvaceeDadoConsumoCtrl {
     public void setListaPontoColeta(List<String> listaPontoColeta) {
         this.listaPontoColeta = listaPontoColeta;
     }
+
+    /**
+     * @return the listaGrafico
+     */
+    public List<SvaceeDadoConsumo> getListaGrafico() {
+        return listaGrafico;
+    }
+
+    /**
+     * @param listaGrafico the listaGrafico to set
+     */
+    public void setListaGrafico(List<SvaceeDadoConsumo> listaGrafico) {
+        this.listaGrafico = listaGrafico;
+    }
+
+    /**
+     * @return the testaArquivo
+     */
+    public int getTestaArquivo() {
+        return testaArquivo;
+    }
+
+    /**
+     * @param testaArquivo the testaArquivo to set
+     */
+    public void setTestaArquivo(int testaArquivo) {
+        this.testaArquivo = testaArquivo;
+    }
+
 
 }
