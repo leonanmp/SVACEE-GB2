@@ -106,7 +106,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
         painelGuias.add(chartPanel, "Visualizador");
         painelGuias.setSelectedComponent(chartPanel);
         } else{
-            JOptionPane.showMessageDialog(null, "Visualização indisponíve "
+            JOptionPane.showMessageDialog(null, "Visualização indisponível "
                     + "\nEscolha um arquivo CSV", "ERRO", JOptionPane.ERROR_MESSAGE);
             
         }
