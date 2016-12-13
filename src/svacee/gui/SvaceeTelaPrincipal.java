@@ -60,7 +60,7 @@ public class SvaceeTelaPrincipal extends javax.swing.JFrame {
             int dadosRetorno = jfc.showOpenDialog(null);
             if (dadosRetorno == JFileChooser.APPROVE_OPTION) {
                 File csv = jfc.getSelectedFile();
-
+                
                 sdcc.obterDadosCsv(csv);
                 exibirDadosTabela();
                 sdcc.preenchePontoColeta();
